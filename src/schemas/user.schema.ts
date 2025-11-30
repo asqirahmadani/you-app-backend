@@ -1,13 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 
-export type UserDocument = User & Document;
+import { BaseSchema } from './base.schema';
+
+export type UserDocument = HydratedDocument<User>;
 
 @Schema({
   timestamps: true,
   collection: 'users',
 })
-export class User {
+export class User extends BaseSchema {
   @Prop({
     required: true,
     unique: true,

@@ -1,13 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 
-export type ProfileDocument = Profile & Document;
+import { BaseSchema } from './base.schema';
+
+export type ProfileDocument = HydratedDocument<Profile>;
 
 @Schema({
   timestamps: true,
   collection: 'profiles',
 })
-export class Profile {
+export class Profile extends BaseSchema {
   @Prop({
     type: Types.ObjectId,
     ref: 'User',
