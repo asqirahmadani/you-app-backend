@@ -218,7 +218,7 @@ export class ProfilesController {
   GET /profiles/horoscope/:horoscope
   Find profiles by horoscope sign
   */
-  @Get('horoscoper/:horoscope')
+  @Get('horoscope/:horoscope')
   @HttpCode(HttpStatus.OK)
   async findByHoroscope(
     @Param('horoscope') horoscope: string,

@@ -130,8 +130,8 @@ export class AuthService {
   */
   async hashPassword(password: string): Promise<string> {
     try {
-      const salt = await bcrypt.genSalt(this.bcryptRounds);
-      return await bcrypt.hash(password, salt);
+      // const salt = await bcrypt.genSalt(this.bcryptRounds);
+      return await bcrypt.hash(password, 10);
     } catch (error) {
       throw new BadRequestException('Error hashing password');
     }
