@@ -38,7 +38,7 @@ export class UsersService {
     return this.userModel.findById(id).select('+password').exec(); // include password fot authentication
   }
 
-  // find user by username
+  // find user by email
   async findByEmail(email: string): Promise<UserDocument | null> {
     return this.userModel
       .findOne({ email: email.toLowerCase() })
