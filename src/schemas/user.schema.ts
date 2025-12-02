@@ -57,8 +57,6 @@ export class User extends BaseSchema {
 export const UserSchema = SchemaFactory.createForClass(User);
 
 // Indexes for better query performance
-UserSchema.index({ email: 1 }); // single field index
-UserSchema.index({ username: 1 });
 UserSchema.index({ email: 1, username: 1 }); // compound index
 
 // Virtual field for profile relationship

@@ -46,35 +46,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # NestJS API Service
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: development
-    container_name: you_app_api
-    restart: unless-stopped
-    environment:
-      NODE_ENV: development
-      PORT: 3000
-      MONGO_URI: mongodb://admin:admin123@mongodb:27017/you_app?authSource=admin
-      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
-      JWT_SECRET: your-super-secret-jwt-key-change-in-production
-      JWT_EXPIRATION: 7d
-    ports:
-      - '3000:3000'
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-    depends_on:
-      mongodb:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    networks:
-      - you_app_network
-    command: npm run start:dev
-
 volumes:
   mongodb_data:
     driver: local
@@ -84,7 +55,3 @@ volumes:
     driver: local
   rabbitmq_log:
     driver: local
-
-networks:
-  you_app_network:
-    driver: bridge

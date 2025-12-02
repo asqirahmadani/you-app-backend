@@ -8,7 +8,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 
-import { Message, MessageDocument } from 'src/schemas/message.schema';
+import { Message, MessageDocument } from '../../schemas/message.schema';
 import { SendMessageDto } from './dto/send-message.dto';
 import { UsersService } from '../users/users.service';
 
@@ -184,11 +184,13 @@ export class ChatService {
       return 0;
     }
 
-    return this.messageModel.countDocuments({
-      to: new Types.ObjectId(userId),
-      read: false,
-      isDeleted: false,
-    });
+    return this.messageModel
+      .countDocuments({
+        to: new Types.ObjectId(userId),
+        read: false,
+        isDeleted: false,
+      })
+      .exec();
   }
 
   /* 
